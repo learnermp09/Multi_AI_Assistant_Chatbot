@@ -1,9 +1,11 @@
+fastapi
+uvicorn
 langchain
 langchain-core
-langchain-community
+langchain-groq
 langchain-openai
-langchain_google_genai
-streamlit
-openai
-fastapi
+langchain-google-genai
 langserve
+pydantic
+python-dotenv
+sse-starlette
