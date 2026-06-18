@@ -1,0 +1,9 @@
+langchain
+langchain-core
+langchain-community
+langchain-openai
+langchain_google_genai
+streamlit
+openai
+fastapi
+langserve
