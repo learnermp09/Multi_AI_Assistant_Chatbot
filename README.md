@@ -275,17 +275,7 @@ BACKEND_URL="https://your-render-service.onrender.com"
 
 ## 📸 Application Preview
 
-### Streamlit Frontend
-
-*Add screenshot here*
-
-### LangServe Playground
-
-*Add screenshot here*
-
-### LangSmith Monitoring Dashboard
-
-*Add screenshot here*
+<img width="3810" height="1872" alt="image" src="https://github.com/user-attachments/assets/9e9c3065-f9fd-43c2-8250-4f0ea4f9c9b6" />
 
 ---
 
