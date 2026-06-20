@@ -11,30 +11,52 @@ st.set_page_config(
 )
 
 # --------------------------------------------------
+# Backend Wake-Up Notice
+# --------------------------------------------------
+st.info(
+    """
+    ℹ️ **Backend Wake-Up Notice**
+
+    The AI backend is hosted on a cloud service that automatically sleeps during periods
+    of inactivity. The first request may take **30–90 seconds** while the service wakes up.
+
+    Once active, responses are typically generated within a few seconds.
+
+    Thank you for your patience.
+    """
+)
+
+# --------------------------------------------------
 # API Endpoints
 # --------------------------------------------------
-BASE_URL = "http://127.0.0.1:8000"
+BASE_URL = "https://multi-ai-assistant-chatbot-1.onrender.com"
 
 GROQ_ENDPOINT = f"{BASE_URL}/chatgroq/invoke"
 OPENAI_ENDPOINT = f"{BASE_URL}/chatopenai/invoke"
 GEMINI_ENDPOINT = f"{BASE_URL}/chatgeminiai/invoke"
 
-
 # --------------------------------------------------
 # API Helper Function
 # --------------------------------------------------
 def get_response(endpoint: str, question: str):
-    response = requests.post(
-        endpoint,
-        json={"input": {"question": question}}
-    )
+    try:
+        response = requests.post(
+            endpoint,
+            json={"input": {"question": question}},
+            timeout=90
+        )
 
-    response.raise_for_status()
+        response.raise_for_status()
 
-    data = response.json()
+        data = response.json()
 
-    return data.get("output", data)
+        return data.get("output", data)
 
+    except requests.exceptions.RequestException as e:
+        return f"Error connecting to backend: {e}"
+
+    except Exception as e:
+        return f"Unexpected error: {e}"
 
 # --------------------------------------------------
 # Streamlit UI
@@ -48,7 +70,6 @@ st.markdown(
 # --------------------------------------------------
 # Groq Assistant
 # --------------------------------------------------
-
 st.image(
     "https://cdn.sanity.io/images/chol0sk5/production/ce0b2266373b3c9722b0bccb9a98441c26c89696-1200x630.png",
     width=120
@@ -73,7 +94,6 @@ if groq_question:
 # --------------------------------------------------
 # Gemini Assistant
 # --------------------------------------------------
-
 st.image(
     "https://cdn.beebom.com/content/2025/07/google-gemini-new-rainbow-colours-1120w630h.webp",
     width=120
@@ -98,7 +118,6 @@ if gemini_question:
 # --------------------------------------------------
 # OpenAI Assistant
 # --------------------------------------------------
-
 st.image(
     "https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg",
     width=120

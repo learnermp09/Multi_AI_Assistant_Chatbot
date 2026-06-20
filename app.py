@@ -4,13 +4,14 @@ from langchain_openai import ChatOpenAI
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.output_parsers import StrOutputParser
 from langserve import add_routes
-from dotenv import load_dotenv
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
+from dotenv import load_dotenv
 load_dotenv()
+
 
 app = FastAPI()
 
